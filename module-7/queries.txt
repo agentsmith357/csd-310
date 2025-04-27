@@ -1,0 +1,37 @@
+-- DISPLAYING Studio RECORDS --
+Studio ID: 1
+Studio Name: 20th Century Fox
+
+Studio ID: 2
+Studio Name: Blumhouse Productions
+
+Studio ID: 3
+Studio Name: Universal Pictures
+
+-- DISPLAYING Genre RECORDS --
+Genre ID: 1
+Genre Name: Horror
+
+Genre ID: 2
+Genre Name: SciFi
+
+Genre ID: 3
+Genre Name: Drama
+
+-- DISPLAYING Short Film RECORDS --
+Film Name: Alien
+Runtime: 117
+
+Film Name: Get Out
+Runtime: 104
+
+-- DISPLAYING Director RECORDS in Order --
+Film Name: Get Out
+Director: Jordan Peele
+
+Film Name: Gladiator
+Director: Ridley Scott
+
+Film Name: Alien
+Director: Ridley Scott
+

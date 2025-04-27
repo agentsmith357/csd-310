@@ -1,0 +1,76 @@
+-- DISPLAYING FILMS --
+Film Name: Gladiator
+Director: Ridley Scott
+Genre Name ID: Drama
+Studio Name: Universal Pictures
+
+Film Name: Alien
+Director: Ridley Scott
+Genre Name ID: SciFi
+Studio Name: 20th Century Fox
+
+Film Name: Get Out
+Director: Jordan Peele
+Genre Name ID: Horror
+Studio Name: Blumhouse Productions
+
+
+ -- DISPLAYING FILMS AFTER INSERT --
+Film Name: Gladiator
+Director: Ridley Scott
+Genre Name ID: Drama
+Studio Name: Universal Pictures
+
+Film Name: Alien
+Director: Ridley Scott
+Genre Name ID: SciFi
+Studio Name: 20th Century Fox
+
+Film Name: Get Out
+Director: Jordan Peele
+Genre Name ID: Horror
+Studio Name: Blumhouse Productions
+
+Film Name: The Invisible Man
+Director: Leigh Whannell
+Genre Name ID: Horror
+Studio Name: Universal Pictures
+
+
+ -- DISPLAYING FILMS AFTER UPDATE --
+Film Name: Alien
+Director: Ridley Scott
+Genre Name ID: Horror
+Studio Name: 20th Century Fox
+
+Film Name: Get Out
+Director: Jordan Peele
+Genre Name ID: Horror
+Studio Name: Blumhouse Productions
+
+Film Name: Gladiator
+Director: Ridley Scott
+Genre Name ID: Drama
+Studio Name: Universal Pictures
+
+Film Name: The Invisible Man
+Director: Leigh Whannell
+Genre Name ID: Horror
+Studio Name: Universal Pictures
+
+
+ -- DISPLAYING FILMS AFTER DELETE --
+Film Name: The Invisible Man
+Director: Leigh Whannell
+Genre Name ID: Horror
+Studio Name: Universal Pictures
+
+Film Name: Get Out
+Director: Jordan Peele
+Genre Name ID: Horror
+Studio Name: Blumhouse Productions
+
+Film Name: Alien
+Director: Ridley Scott
+Genre Name ID: Horror
+Studio Name: 20th Century Fox

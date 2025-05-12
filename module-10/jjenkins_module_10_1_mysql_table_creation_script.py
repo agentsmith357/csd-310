@@ -1,14 +1,3 @@
-"""
-Author: Jelani Jenkins & Clint Scott
-Date: 05/04/2025
-Assignment: Module 10.1 - Create Table Script
-
-write the .sql script to create the tables in MySQL, and populate each with at least 6 records
-(fewer if noted in the case study, for example only three suppliers noted at Bacchus Winery). 
-Write a python script that displays the data in each table (remember the movies example?),
-and take a screenshot of the results of the script that displays the data in each table. 
-
-"""
 import mysql.connector
 from dotenv import dotenv_values
 from pathlib import Path
@@ -23,25 +12,37 @@ else:
     sys.exit("No .env file found.")
 
 def reconnect_to_db():
-    return mysql.connector.connect(**{"user": secrets["USER"],
-    "password": secrets["PASSWORD"],
-    "host": secrets["HOST"],
-    "database": secrets["DATABASE"],
-    "raise_on_warnings": True})
+    return mysql.connector.connect(**{
+        "user": secrets["USER"],
+        "password": secrets["PASSWORD"],
+        "host": secrets["HOST"],
+        "database": secrets["DATABASE"],
+        "raise_on_warnings": True
+    })
 
 def create_tables():
     conn = reconnect_to_db()
     cursor = conn.cursor()
 
     try:
+        # Drop tables if they exist
+        drop_order = [
+            "WineInventory", "WineOrders", "Distributor", "Wine",
+            "SupplyInventory", "SupplyShipment", "Supplier", "SupplyType",
+            "EmployeeHours", "Employee", "Department"
+        ]
+        for table in drop_order:
+            cursor.execute(f"DROP TABLE IF EXISTS {table};")
+
+        # Create tables
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS Department (
+            CREATE TABLE Department (
                 DepartmentID INT AUTO_INCREMENT PRIMARY KEY,
                 Name VARCHAR(255) NOT NULL
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS Employee (
+            CREATE TABLE Employee (
                 EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
                 Name VARCHAR(255) NOT NULL,
                 DepartmentID INT,
@@ -50,7 +51,7 @@ def create_tables():
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS EmployeeHours (
+            CREATE TABLE EmployeeHours (
                 RecordID INT AUTO_INCREMENT PRIMARY KEY,
                 EmployeeID INT,
                 Week DATE,
@@ -59,19 +60,19 @@ def create_tables():
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS SupplyType (
+            CREATE TABLE SupplyType (
                 SupplyTypeID INT AUTO_INCREMENT PRIMARY KEY,
                 Description VARCHAR(255)
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS Supplier (
+            CREATE TABLE Supplier (
                 SupplierID INT AUTO_INCREMENT PRIMARY KEY,
                 Name VARCHAR(255)
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS SupplyShipment (
+            CREATE TABLE SupplyShipment (
                 ShipmentID INT AUTO_INCREMENT PRIMARY KEY,
                 SupplierID INT,
                 SupplyTypeID INT,
@@ -83,7 +84,7 @@ def create_tables():
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS SupplyInventory (
+            CREATE TABLE SupplyInventory (
                 SupplyInventoryID INT AUTO_INCREMENT PRIMARY KEY,
                 SupplyTypeID INT,
                 QuantityOnHand INT,
@@ -92,20 +93,20 @@ def create_tables():
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS Wine (
+            CREATE TABLE Wine (
                 WineID INT AUTO_INCREMENT PRIMARY KEY,
                 Name VARCHAR(255),
                 Type VARCHAR(255)
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS Distributor (
+            CREATE TABLE Distributor (
                 DistributorID INT AUTO_INCREMENT PRIMARY KEY,
                 Name VARCHAR(255)
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS WineOrders (
+            CREATE TABLE WineOrders (
                 OrderID INT AUTO_INCREMENT PRIMARY KEY,
                 DistributorID INT,
                 WineID INT,
@@ -118,7 +119,7 @@ def create_tables():
             );
         """)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS WineInventory (
+            CREATE TABLE WineInventory (
                 WineInventoryID INT AUTO_INCREMENT PRIMARY KEY,
                 WineID INT,
                 QuantityOnHand INT,
@@ -128,10 +129,11 @@ def create_tables():
         """)
 
         conn.commit()
-        print("All tables created successfully.")
+        print("Tables dropped and recreated successfully.")
 
     except mysql.connector.Error as err:
         print(f"Error: {err}")
+        conn.rollback()
 
     cursor.close()
     conn.close()
